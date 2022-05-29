@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const index = ({users}) => {
     /** for data load in React
@@ -7,7 +8,18 @@ const index = ({users}) => {
      *  */  
     return (
         <div>
-            <h2>This is users main page: {users.length }</h2>
+            <h2>This is users main page: {users.length}</h2>
+            {
+                users.map((user, index) => <div
+                
+                key={index}>
+                    <h4>Name: {user.name}
+                        <Link href={`/users/${user.id}`}>
+                            <button>Explore</button>
+                    </Link>
+                    </h4>
+                </div>)
+            }
         </div>
     );
 };
@@ -20,4 +32,5 @@ export async function getStaticProps(context) {
     return {
       props: {users:data}, // will be passed to the page component as props
     }
-  }
+}
+  
